@@ -1,0 +1,10 @@
+/home/pi/raspbian_temp/target/debug/deps/tm1637_gpio_driver-bb00d32279a7c0ca.rmeta: /home/pi/.cargo/registry/src/github.com-1285ae84e5963aae/tm1637-gpio-driver-2.0.2/src/lib.rs /home/pi/.cargo/registry/src/github.com-1285ae84e5963aae/tm1637-gpio-driver-2.0.2/src/mappings.rs /home/pi/.cargo/registry/src/github.com-1285ae84e5963aae/tm1637-gpio-driver-2.0.2/src/fourdigit7segdis.rs /home/pi/.cargo/registry/src/github.com-1285ae84e5963aae/tm1637-gpio-driver-2.0.2/src/gpio_api/mod.rs /home/pi/.cargo/registry/src/github.com-1285ae84e5963aae/tm1637-gpio-driver-2.0.2/src/gpio_api/gpio_cdev/mod.rs /home/pi/.cargo/registry/src/github.com-1285ae84e5963aae/tm1637-gpio-driver-2.0.2/src/gpio_api/dummy/mod.rs
+
+/home/pi/raspbian_temp/target/debug/deps/tm1637_gpio_driver-bb00d32279a7c0ca.d: /home/pi/.cargo/registry/src/github.com-1285ae84e5963aae/tm1637-gpio-driver-2.0.2/src/lib.rs /home/pi/.cargo/registry/src/github.com-1285ae84e5963aae/tm1637-gpio-driver-2.0.2/src/mappings.rs /home/pi/.cargo/registry/src/github.com-1285ae84e5963aae/tm1637-gpio-driver-2.0.2/src/fourdigit7segdis.rs /home/pi/.cargo/registry/src/github.com-1285ae84e5963aae/tm1637-gpio-driver-2.0.2/src/gpio_api/mod.rs /home/pi/.cargo/registry/src/github.com-1285ae84e5963aae/tm1637-gpio-driver-2.0.2/src/gpio_api/gpio_cdev/mod.rs /home/pi/.cargo/registry/src/github.com-1285ae84e5963aae/tm1637-gpio-driver-2.0.2/src/gpio_api/dummy/mod.rs
+
+/home/pi/.cargo/registry/src/github.com-1285ae84e5963aae/tm1637-gpio-driver-2.0.2/src/lib.rs:
+/home/pi/.cargo/registry/src/github.com-1285ae84e5963aae/tm1637-gpio-driver-2.0.2/src/mappings.rs:
+/home/pi/.cargo/registry/src/github.com-1285ae84e5963aae/tm1637-gpio-driver-2.0.2/src/fourdigit7segdis.rs:
+/home/pi/.cargo/registry/src/github.com-1285ae84e5963aae/tm1637-gpio-driver-2.0.2/src/gpio_api/mod.rs:
+/home/pi/.cargo/registry/src/github.com-1285ae84e5963aae/tm1637-gpio-driver-2.0.2/src/gpio_api/gpio_cdev/mod.rs:
+/home/pi/.cargo/registry/src/github.com-1285ae84e5963aae/tm1637-gpio-driver-2.0.2/src/gpio_api/dummy/mod.rs:
