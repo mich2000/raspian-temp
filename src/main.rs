@@ -23,7 +23,7 @@ fn main() -> Result<(), Box<dyn Error>> {
     
     let tm_handler : JoinHandle<Result<(),&'static str>> = thread::spawn(move || {
         let sys_args = util::get_args();
-        let mut cpu = util::get_rasperry_pi_temp();
+        let mut cpu : u16 = util::get_rasperry_pi_temp()?;
         let mut fahrenheit = false;
         let mut tm1637display = setup_gpio_cdev(
             util::string_to_u32(&sys_args[2])?,
@@ -37,16 +37,12 @@ fn main() -> Result<(), Box<dyn Error>> {
             if received.is_ok() {
                 fahrenheit = !fahrenheit;
             }
-            if cpu.is_err() {
-                break;
-            }
             if fahrenheit {
-                cpu = Ok((cpu.unwrap() * 9/5 + 32) as u16);
+                cpu = (cpu * 9/5 + 32) as u16;
             }
-            tm1637display.write_segments_raw(&TM1637Adapter::encode_number(cpu.unwrap()), 0);
-            cpu = util::get_rasperry_pi_temp();
+            tm1637display.write_segments_raw(&TM1637Adapter::encode_number(cpu), 0);
+            cpu = util::get_rasperry_pi_temp()?;
         }
-        return Ok(())
     });
 
     let btn_handler : JoinHandle<Result<(),&'static str>> = thread::spawn(move || {
