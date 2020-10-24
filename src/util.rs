@@ -8,6 +8,20 @@ pub fn get_args() -> Vec<String> {
     env::args().collect()
 }
 
+pub fn string_to_u8(string : &str) -> Result<u8,&'static str> {
+    match string.parse::<u8>() {
+        Ok(num) => Ok(num),
+        Err(_) => Err("Could not parse the string to u8.")
+    }
+}
+
+pub fn string_to_u16(string : &str) -> Result<u16,&'static str> {
+    match string.parse::<u16>() {
+        Ok(num) => Ok(num),
+        Err(_) => Err("Could not parse the string to u16.")
+    }
+}
+
 pub fn string_to_u32(string : &str) -> Result<u32,&'static str> {
     match string.parse::<u32>() {
         Ok(num) => Ok(num),
@@ -15,7 +29,7 @@ pub fn string_to_u32(string : &str) -> Result<u32,&'static str> {
     }
 }
 
-pub fn get_brightness(num : u32) -> Result<Brightness,&'static str> {
+pub fn get_brightness(num : u16) -> Result<Brightness,&'static str> {
     match num {
         0 => Ok(Brightness::L0),
         1 => Ok(Brightness::L1),
@@ -29,7 +43,11 @@ pub fn get_brightness(num : u32) -> Result<Brightness,&'static str> {
     }
 }
 
-pub fn get_rasperry_pi_temp() -> u32 {
-    string_to_u32(fs::read_to_string(CPU_TEMP_PATH).expect("Could not read the file where the raspberry pi cpu temperature is.")
-    .trim()).expect("could not get u32 of the result.") / 1000
+pub fn get_rasperry_pi_temp() -> Result<u16,&'static str> {
+    match fs::read_to_string(CPU_TEMP_PATH) {
+        Ok(cpu_string) => {
+            Ok(string_to_u16(cpu_string.trim())? /1000)
+        },
+        Err(_) => Err("Could not read the cpu temperature from the raspberry pi.")
+    }
 }
