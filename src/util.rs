@@ -1,12 +1,7 @@
 use tm1637_gpio_driver::Brightness;
-use std::env;
 use std::fs;
 
 static CPU_TEMP_PATH : &str = "/sys/class/thermal/thermal_zone0/temp";
-
-pub fn get_args() -> Vec<String> {
-    env::args().collect()
-}
 
 pub fn string_to_u8(string : &str) -> Result<u8,&'static str> {
     match string.parse::<u8>() {

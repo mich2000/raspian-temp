@@ -18,4 +18,4 @@ incremental = false
 opt-level = "z"
 
 [build]
-RUSTFLAGS="-C target-cpu=native"
+rustflags = ["-C", "target-cpu=native"]
