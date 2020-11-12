@@ -10,7 +10,7 @@ The basic deploy of the application is you install it and give it good parameter
 
 * **dio_pin_tm** => Digital input/output pin of the tm1637. *Ex: pin 23 on raspberry pi 4 1gb*
 * **clk_pin_tm** => Clock pin of the tm1637. *Ex: pin 18 on raspberry pi 4 1gb*
-* **brightness** => brightness of the tm1637. *Ex: pin 5 on raspberry pi 4 1gb*
+* **brightness** => brightness of the tm1637. *Ex: Brightness levels between 0 and 7*
 * **button_pin** => Digital signal pin. *Ex: pin 17 on raspberry pi 4 1gb*
 
 ## Warning
