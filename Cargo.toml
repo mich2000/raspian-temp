@@ -14,8 +14,4 @@ rust_gpiozero = "0.2.0"
 panic = "abort"
 lto = true
 codegen-units = 1
-incremental = false
 opt-level = "z"
-
-[build]
-rustflags = ["-C", "target-cpu=native"]
