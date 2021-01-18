@@ -6,13 +6,13 @@ use rust_gpiozero::*;
 
 pub fn get_button_thread_handler(
     btn_pin: u8,
-    tx: Sender<bool>,
+    tx: Sender<()>,
 ) -> JoinHandle<Result<(), &'static str>> {
     thread::spawn(move || {
         let mut button = Button::new(btn_pin);
         loop {
             button.wait_for_press(None);
-            tx.send(true).unwrap();
+            tx.send(()).unwrap();
         }
     })
 }

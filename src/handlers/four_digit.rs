@@ -12,7 +12,7 @@ pub fn get_tm_1637_thread(
     dio_pin: u32,
     clk_pin: u32,
     brightness: Brightness,
-    rx: Receiver<bool>,
+    rx: Receiver<()>,
 ) -> JoinHandle<Result<(), &'static str>> {
     thread::spawn(move || {
         let mut tm1637display = setup_gpio_cdev(
@@ -27,7 +27,7 @@ pub fn get_tm_1637_thread(
             let received = rx.recv_timeout(Duration::from_millis(500));
             //if received.is_ok() { fahrenheit = !fahrenheit; }
 	    //cpu_array[0] = (((UpCharBits::UpF - UpCharBits::UpC) * fahrenheit as u8) - UpCharBits::UpC) as u8;
-            fahrenheit = received.is_ok() ^ fahrenheit;
+            fahrenheit ^= received.is_ok();
             tm1637display.write_segments_raw(
                 &convert_u16_to_tm_array(util::get_rasperry_pi_temp()?, fahrenheit),
                 0,
