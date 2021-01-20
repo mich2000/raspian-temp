@@ -24,10 +24,9 @@ pub fn get_tm_1637_thread(
         tm1637display.set_brightness(brightness);
         let mut fahrenheit = false;
         loop {
-            let received = rx.recv_timeout(Duration::from_millis(500));
             //if received.is_ok() { fahrenheit = !fahrenheit; }
-	    //cpu_array[0] = (((UpCharBits::UpF - UpCharBits::UpC) * fahrenheit as u8) - UpCharBits::UpC) as u8;
-            fahrenheit ^= received.is_ok();
+            //cpu_array[0] = (((UpCharBits::UpF - UpCharBits::UpC) * fahrenheit as u8) - UpCharBits::UpC) as u8;
+            fahrenheit ^= rx.recv_timeout(Duration::from_millis(500)).is_ok();
             tm1637display.write_segments_raw(
                 &convert_u16_to_tm_array(util::get_rasperry_pi_temp()?, fahrenheit),
                 0,
@@ -37,9 +36,9 @@ pub fn get_tm_1637_thread(
 }
 
 fn convert_u16_to_tm_array(num: u16, fahrenheit: bool) -> [u8; 4] {
-    let mut cpu = num;
     //if fahrenheit { cpu = (cpu * 9 / 5 + 32) as u16; }
-    let mut cpu_array = TM1637Adapter::encode_number((num + ((num * 0.8) + 32) * fahrenheit as u16) as u16);
+    let mut cpu_array =
+        TM1637Adapter::encode_number((num + ((num * 0.8) + 32) * fahrenheit as u16) as u16);
     cpu_array[0] = ((56 * fahrenheit as u8) + 57) as u8;
     cpu_array
 }
