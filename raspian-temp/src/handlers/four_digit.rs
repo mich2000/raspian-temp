@@ -37,8 +37,9 @@ pub fn get_tm_1637_thread(
 
 fn convert_u16_to_tm_array(num: u16, fahrenheit: bool) -> [u8; 4] {
     //if fahrenheit { cpu = (cpu * 9 / 5 + 32) as u16; }
-    let mut cpu_array =
-        TM1637Adapter::encode_number((num + ((num * 0.8) + 32) * fahrenheit as u16) as u16);
+    let mut cpu_array = TM1637Adapter::encode_number(
+        (num + ((num as f32 * 0.8) as u16 + 32) * fahrenheit as u16) as u16,
+    );
     cpu_array[0] = ((56 * fahrenheit as u8) + 57) as u8;
     cpu_array
 }
