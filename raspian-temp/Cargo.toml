@@ -1,0 +1,17 @@
+[package]
+name = "raspbian_temp"
+version = "0.1.0"
+authors = ["Michael Hertsens <michael28072000@outlook.com>"]
+edition = "2018"
+
+[dependencies]
+tm1637-gpio-driver = "2.0.4"
+rust_gpiozero = "0.2.0"
+serde_json = "1.0"
+serde = { version = "1.0", features = ["derive"] }
+
+[profile.release]
+panic = "abort"
+lto = true
+codegen-units = 1
+opt-level = "z"
