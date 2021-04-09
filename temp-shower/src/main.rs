@@ -1,4 +1,4 @@
-use rppal::i2c::I2c;
+use ruspiro_i2c::I2C;
 use std::error::Error;
 use std::time::Duration;
 use std::thread::sleep;
@@ -6,12 +6,11 @@ use std::thread::sleep;
 const ADDR_GROVE_TEMP: u16 = 0x44;
 
 fn main() -> Result<(), Box<dyn Error>> {
-    println!("Hello, world!");
-    let mut bus = I2c::with_bus(1)?;
-    bus.set_slave_address(0x44)?;
-    bus.smbus_block_read(0x2c, [0x06])?;
-    sleep(Duration::from_micros(500_000));
-    let mut bytes = Vec::new();
-    bus.smbus_block_read(0x44, &bytes)?;
+    let device_addr = 0x68;
+    I2C.take_for(|i2c| {
+        if i2c.check_device(device_addr).is_ok() {
+            println!("tm1637 is okay");
+        }
+    });
     Ok(())
 }
