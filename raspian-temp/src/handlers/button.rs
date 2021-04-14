@@ -9,9 +9,9 @@ pub fn get_button_thread_handler(
     tx: Sender<()>,
 ) -> JoinHandle<Result<(), &'static str>> {
     thread::spawn(move || {
-        let mut button = Button::new(btn_pin);
+        let mut button = DigitalInputDevice::new(btn_pin);
         loop {
-            button.wait_for_press(None);
+            button.wait_for_active(None);
             tx.send(()).unwrap();
         }
     })
