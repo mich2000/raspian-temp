@@ -1,4 +1,4 @@
-use std::thread::{self, sleep, JoinHandle};
+use std::thread::sleep;
 use std::time::Duration;
 
 use tm1637_gpio_driver::gpio_api::setup_gpio_cdev;

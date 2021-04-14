@@ -24,7 +24,5 @@ fn main() -> Result<(), Box<dyn Error>> {
     let btn_handler: JoinHandle<Result<(), &'static str>> =
         handlers::button::get_button_thread_handler(config.get_btn_pin(), button_sender);
     btn_handler.join().unwrap()?;
-    tm_handler?;
-
-    Ok(())
+    tm_handler?
 }
