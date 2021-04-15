@@ -7,7 +7,7 @@ edition = "2018"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-rust_gpiozero = "0.2.0"
+rust_gpiozero = { path="../rust_gpiozero" }
 
 [profile.release]
 panic = "abort"

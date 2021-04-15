@@ -6,7 +6,7 @@ edition = "2018"
 
 [dependencies]
 tm1637-gpio-driver = "2.0.4"
-rust_gpiozero = "0.2.0"
+rust_gpiozero = { path="../rust_gpiozero" }
 serde_json = "1.0"
 serde = { version = "1.0", features = ["derive"] }
 
