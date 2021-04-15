@@ -100,6 +100,7 @@ dependencies = [
 [[package]]
 name = "rust_gpiozero"
 version = "0.2.0"
+source = "git+https://github.com/mich2000/rust_gpiozero.git#7cace7b2b81e416df32a22f1fe23e70b0dd07c83"
 dependencies = [
  "rppal",
 ]
