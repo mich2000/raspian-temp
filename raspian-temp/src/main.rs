@@ -2,6 +2,8 @@ use std::env::args;
 use std::error::Error;
 use std::sync::mpsc;
 use std::thread::JoinHandle;
+use std::sync::mpsc::Sender;
+use rust_gpiozero::DigitalInputDevice;
 
 mod conf;
 mod handlers;
@@ -21,10 +23,12 @@ fn main() -> Result<(), Box<dyn Error>> {
         config.get_brightness()?,
         tm1637_receiver,
     );
-    let btn_handler: JoinHandle<Result<(), &'static str>> =
-        handlers::button::get_button_thread_handler(config.get_btn_pin(), button_sender);
-    btn_handler.join().unwrap()?;
     tm_handler.join().unwrap()?;
+    let mut button = DigitalInputDevice::new(config.get_btn_pin();
+    loop {
+        button.wait_for_active(None);
+        tx.send(()).unwrap();
+    }
 
     Ok(())
 }

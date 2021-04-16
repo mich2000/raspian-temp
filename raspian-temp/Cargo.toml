@@ -15,3 +15,6 @@ panic = "abort"
 lto = true
 codegen-units = 1
 opt-level = "z"
+
+[build]
+RUSTFLAGS="-C target-cpu=native link-arg=-s"
