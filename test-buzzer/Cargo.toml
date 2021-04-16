@@ -1,0 +1,17 @@
+[package]
+name = "test-buzzer"
+version = "0.1.0"
+authors = ["Michael Hertsens <michael28072000@outlook.com>"]
+edition = "2018"
+
+[dependencies]
+rust_gpiozero = { git = "https://github.com/mich2000/rust_gpiozero.git" }
+
+[profile.release]
+panic = "abort"
+lto = true
+codegen-units = 1
+opt-level = "z"
+
+[build]
+RUSTFLAGS="-C target-cpu=native link-arg=-s"
