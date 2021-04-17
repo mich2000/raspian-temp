@@ -14,7 +14,7 @@ fn main() -> Result<(), Box<dyn Error>> {
     let (button_sender, tm1637_receiver) = mpsc::channel();
     let config: conf::RaspianConfig =
         serde_json::from_str(&args().nth(1).ok_or(RaspianError::JsonConfigFaulthy)?)
-            .or(Err(RaspianError::JsonParsingFailed)?);
+            .or(Err(RaspianError::JsonParsingFailed))?;
     let tm_handler: JoinHandle<Result<(), &'static str>> = four_digit::get_tm_1637_thread(
         config.get_dio_pin(),
         config.get_clk_pin(),

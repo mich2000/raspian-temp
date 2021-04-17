@@ -13,7 +13,7 @@ pub enum RaspianError {
 impl fmt::Display for RaspianError {
     fn fmt(&self, f: &mut Formatter<'_>) -> fmt::Result {
         match &self {
-            RaspianError::JsonParsingFailed => write!(f, ""),
+            RaspianError::JsonParsingFailed => write!(f, "Could not parse the given json"),
             RaspianError::JsonConfigFaulthy => write!(f, "Give in a json configuration."),
             RaspianError::ParsingNumFailed => write!(f, "Could not parse the string to u16."),
             RaspianError::CpuTempFileFail => write!(
