@@ -26,7 +26,7 @@ fn main() -> Result<(), Box<dyn Error>> {
     let mut button = DigitalInputDevice::new(config.get_btn_pin();
     loop {
         button.wait_for_active(None);
-        tx.send(()).unwrap();
+        button_sender.send(()).unwrap();
     }
     tm_handler.join().unwrap()?;
 
