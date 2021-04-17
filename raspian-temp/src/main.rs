@@ -6,7 +6,7 @@ use std::sync::mpsc::Sender;
 use rust_gpiozero::DigitalInputDevice;
 
 mod conf;
-mod handlers;
+mod four_digit;
 mod util;
 
 /**
@@ -17,13 +17,13 @@ fn main() -> Result<(), Box<dyn Error>> {
     let (button_sender, tm1637_receiver) = mpsc::channel();
     let config: conf::RaspianConfig =
         serde_json::from_str(&args().nth(1).expect("Give in a json configuration."))?;
-    let tm_handler: JoinHandle<Result<(), &'static str>> = handlers::four_digit::get_tm_1637_thread(
+    let tm_handler: JoinHandle<Result<(), &'static str>> = four_digit::get_tm_1637_thread(
         config.get_dio_pin(),
         config.get_clk_pin(),
         config.get_brightness()?,
         tm1637_receiver,
     );
-    let mut button = DigitalInputDevice::new(config.get_btn_pin();
+    let mut button = DigitalInputDevice::new(config.get_btn_pin());
     loop {
         button.wait_for_active(None);
         button_sender.send(()).unwrap();
