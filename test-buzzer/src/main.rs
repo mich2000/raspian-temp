@@ -1,7 +1,10 @@
-use rust_gpiozero::Buzzer;
+use rppal::gpio::Gpio;
 
-fn main() {
-    let mut buzzer = Buzzer::new(2);
-    buzzer.set_beep_count(5);
-    buzzer.beep(0.5, 1);
+fn main() -> Result<(), Box<dyn Error>> {
+    let mut pin = Gpio::new()?.get(2)?.into_output();
+
+    loop {
+        pin.toggle();
+        thread::sleep(Duration::from_millis(500));
+    }
 }
