@@ -1,5 +1,5 @@
 use std::error::Error;
-use std::fmt::{Debug, Formatter};
+use std::fmt::{self, Debug, Formatter};
 
 #[derive(Error)]
 pub enum RaspianError {
@@ -11,7 +11,7 @@ pub enum RaspianError {
 }
 
 impl fmt::Display for RaspianError {
-    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+    fn fmt(&self, f: &mut Formatter<'_>) -> fmt::Result {
         match &self {
             RaspianError::JsonParsingFailed => write!(f, ""),
             RaspianError::JsonConfigFaulthy => write!(f, "Give in a json configuration."),
