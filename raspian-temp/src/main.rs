@@ -2,7 +2,6 @@ use std::env::args;
 use std::error::Error;
 use std::sync::mpsc;
 use std::thread::JoinHandle;
-use std::sync::mpsc::Sender;
 use rust_gpiozero::DigitalInputDevice;
 
 mod conf;
