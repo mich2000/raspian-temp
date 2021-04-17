@@ -1,7 +1,7 @@
 use std::error::Error;
-use std::fmt::{self, Debug, Formatter};
+use std::fmt::{self, Display, Formatter};
 
-#[derive(Error)]
+#[derive(Debug, Error)]
 pub enum RaspianError {
     JsonParsingFailed,
     JsonConfigFaulthy,
