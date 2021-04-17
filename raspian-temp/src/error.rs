@@ -1,7 +1,7 @@
 use std::error::Error;
 use std::fmt::{self, Display, Formatter};
 
-#[derive(Debug, Error)]
+#[derive(Debug)]
 pub enum RaspianError {
     JsonParsingFailed,
     JsonConfigFaulthy,
@@ -9,6 +9,8 @@ pub enum RaspianError {
     CpuTempFileFail,
     OutOfBrightnessRange,
 }
+
+impl Error for RaspianError {}
 
 impl fmt::Display for RaspianError {
     fn fmt(&self, f: &mut Formatter<'_>) -> fmt::Result {
