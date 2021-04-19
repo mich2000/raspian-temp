@@ -31,5 +31,5 @@ pub fn get_rasperry_pi_temp(buffer: &mut String) -> Result<u16, RaspianError> {
     let mut handle = file_pi_temp.take(7);
     handle.read_to_string(&mut buffer);
     drop(file_pi_temp);
-    Ok(string_to_u16(cpu_string.trim())? / 1000)
+    Ok(string_to_u16(buffer.trim())? / 1000)
 }
