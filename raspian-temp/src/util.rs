@@ -27,9 +27,8 @@ pub fn get_brightness(num: u16) -> Result<Brightness, RaspianError> {
 }
 
 pub fn get_rasperry_pi_temp(buffer: &mut String) -> Result<u16, RaspianError> {
-    let file_pi_temp = std::fs::File::open(CPU_TEMP_PATH).unwrap();
+    let file_pi_temp = std::fs::File::open(CPU_TEMP_PATH).or(Err(RaspianError::CpuTempFileFail))?;
     let mut handle = file_pi_temp.take(7);
-    handle.read_to_string(&mut buffer);
-    drop(file_pi_temp);
+    handle.read_to_string(buffer).or(Err(RaspianError::CpuTempCannotBeRead))?;
     Ok(string_to_u16(buffer.trim())? / 1000)
 }

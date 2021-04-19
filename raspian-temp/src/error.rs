@@ -7,6 +7,7 @@ pub enum RaspianError {
     JsonConfigFaulthy,
     ParsingNumFailed,
     CpuTempFileFail,
+    CpuTempCannotBeRead,
     OutOfBrightnessRange,
 }
 
@@ -18,6 +19,9 @@ impl fmt::Display for RaspianError {
             RaspianError::JsonParsingFailed => write!(f, "Could not parse the given json"),
             RaspianError::JsonConfigFaulthy => write!(f, "Give in a json configuration."),
             RaspianError::ParsingNumFailed => write!(f, "Could not parse the string to u16."),
+            RaspianError::CpuTempCannotBeRead => {
+                write!(f, "Could not read from the raspberry pi file temperature")
+            }
             RaspianError::CpuTempFileFail => write!(
                 f,
                 "Could not read the cpu temperature from the raspberry pi."
