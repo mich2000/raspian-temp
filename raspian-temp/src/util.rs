@@ -1,5 +1,4 @@
 use crate::RaspianError;
-use std::fs;
 use std::io::Read;
 use tm1637_gpio_driver::Brightness;
 
