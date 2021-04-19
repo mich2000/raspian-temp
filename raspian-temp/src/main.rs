@@ -15,7 +15,7 @@ fn main() -> Result<(), Box<dyn Error>> {
     let config: conf::RaspianConfig =
         serde_json::from_str(&args().nth(1).ok_or(RaspianError::JsonConfigFaulthy)?)
             .or(Err(RaspianError::JsonParsingFailed))?;
-    let tm_handler: JoinHandle<Result<(), &'static str>> = four_digit::get_tm_1637_thread(
+    let tm_handler: JoinHandle<Result<(), RaspianError>> = four_digit::get_tm_1637_thread(
         config.get_dio_pin(),
         config.get_clk_pin(),
         config.get_brightness()?,

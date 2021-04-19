@@ -13,7 +13,7 @@ pub fn get_tm_1637_thread(
     clk_pin: u32,
     brightness: Brightness,
     rx: Receiver<()>,
-) -> JoinHandle<Result<(), &'static str>> {
+) -> JoinHandle<Result<(), RaspianError>> {
     thread::spawn(move || {
         let mut tm1637display = setup_gpio_cdev(
             clk_pin,

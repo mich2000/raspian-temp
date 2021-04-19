@@ -19,7 +19,7 @@ impl RaspianConfig {
         self.clk_pin
     }
 
-    pub fn get_brightness(&self) -> Result<Brightness, &'static str> {
+    pub fn get_brightness(&self) -> Result<Brightness, RaspianError> {
         get_brightness(self.brightness)
     }
 
