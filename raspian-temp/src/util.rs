@@ -1,5 +1,6 @@
 use std::fs;
 use tm1637_gpio_driver::Brightness;
+use crate::RaspianError;
 
 static CPU_TEMP_PATH: &str = "/sys/class/thermal/thermal_zone0/temp";
 

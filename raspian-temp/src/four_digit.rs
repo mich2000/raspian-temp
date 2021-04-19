@@ -7,6 +7,7 @@ use tm1637_gpio_driver::{Brightness, TM1637Adapter};
 use std::sync::mpsc::Receiver;
 
 use crate::util;
+use crate::RaspianError;
 
 pub fn get_tm_1637_thread(
     dio_pin: u32,
