@@ -1,6 +1,7 @@
 use crate::util::get_brightness;
 use serde::Deserialize;
 use tm1637_gpio_driver::Brightness;
+use crate::RaspianError;
 
 #[derive(Deserialize)]
 pub struct RaspianConfig {
