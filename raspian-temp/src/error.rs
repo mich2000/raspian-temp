@@ -1,5 +1,5 @@
 use std::error::Error;
-use std::fmt::{self, Display, Formatter};
+use std::fmt::{self, Formatter};
 
 #[derive(Debug)]
 pub enum RaspianError {

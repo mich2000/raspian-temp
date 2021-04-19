@@ -24,14 +24,17 @@ pub fn get_tm_1637_thread(
         );
         tm1637display.set_brightness(brightness);
         let mut fahrenheit = false;
+        // We are mostly reading 7 bytes to be sure we got the temperature.
+        let mut temp_vector = String::with_capacity(7);
         loop {
             //if received.is_ok() { fahrenheit = !fahrenheit; }
             //cpu_array[0] = (((UpCharBits::UpF - UpCharBits::UpC) * fahrenheit as u8) - UpCharBits::UpC) as u8;
             fahrenheit ^= rx.recv_timeout(Duration::from_millis(500)).is_ok();
             tm1637display.write_segments_raw(
-                &convert_u16_to_tm_array(util::get_rasperry_pi_temp()?, fahrenheit),
+                &convert_u16_to_tm_array(util::get_rasperry_pi_temp(&mut temp_vector)?, fahrenheit),
                 0,
             );
+            temp_vector.clear();
         }
     })
 }

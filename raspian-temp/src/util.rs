@@ -1,6 +1,7 @@
-use std::fs;
-use tm1637_gpio_driver::Brightness;
 use crate::RaspianError;
+use std::fs;
+use std::io::Read;
+use tm1637_gpio_driver::Brightness;
 
 static CPU_TEMP_PATH: &str = "/sys/class/thermal/thermal_zone0/temp";
 
@@ -25,9 +26,10 @@ pub fn get_brightness(num: u16) -> Result<Brightness, RaspianError> {
     }
 }
 
-pub fn get_rasperry_pi_temp() -> Result<u16, RaspianError> {
-    match fs::read_to_string(CPU_TEMP_PATH) {
-        Ok(cpu_string) => Ok(string_to_u16(cpu_string.trim())? / 1000),
-        Err(_) => Err(RaspianError::CpuTempFileFail),
-    }
+pub fn get_rasperry_pi_temp(buffer: &mut String) -> Result<u16, RaspianError> {
+    let mut file_pi_temp = std::fs::File::open(CPU_TEMP_PATH).unwrap();
+    let mut handle = file_pi_temp.take(7);
+    handle.read(&mut buffer);
+    drop(file);
+    Ok(string_to_u16(cpu_string.trim())? / 1000)
 }
