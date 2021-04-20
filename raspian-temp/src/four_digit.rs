@@ -22,26 +22,26 @@ pub fn get_tm_1637_thread(
             Box::from(|| sleep(Duration::from_micros(100))),
             "/dev/gpiochip0",
         );
+        let wait_duration = Duration::from_millis(500);
         tm1637display.set_brightness(brightness);
         let mut fahrenheit = false;
-        // We are mostly reading 7 bytes to be sure we got the temperature.
+        // We are mostly reading 2 bytes to be sure we got the temperature.
         let mut temp_vector = [0; 2];
         loop {
             //if received.is_ok() { fahrenheit = !fahrenheit; }
-            //cpu_array[0] = (((UpCharBits::UpF - UpCharBits::UpC) * fahrenheit as u8) - UpCharBits::UpC) as u8;
-            fahrenheit ^= rx.recv_timeout(Duration::from_millis(500)).is_ok();
+            fahrenheit ^= rx.recv_timeout(wait_duration).is_ok();
             tm1637display.write_segments_raw(
                 &convert_u16_to_tm_array(util::get_rasperry_pi_temp(&mut temp_vector)?, fahrenheit),
                 0,
             );
-            // Reset buffer
         }
     })
 }
 
 fn convert_u16_to_tm_array(num: u16, fahrenheit: bool) -> [u8; 4] {
     let mut cpu_array =
-        TM1637Adapter::encode_number(num + (num * 4 / 5 + 32) * fahrenheit as u16);
+    TM1637Adapter::encode_number(num + (num * 4 / 5 + 32) * fahrenheit as u16);
+    //cpu_array[0] = (((UpCharBits::UpF - UpCharBits::UpC) * fahrenheit as u8) - UpCharBits::UpC) as u8;
     cpu_array[0] = (56 * fahrenheit as u8) + 57;
     cpu_array
 }
