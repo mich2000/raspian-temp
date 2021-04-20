@@ -25,7 +25,7 @@ pub fn get_tm_1637_thread(
         tm1637display.set_brightness(brightness);
         let mut fahrenheit = false;
         // We are mostly reading 7 bytes to be sure we got the temperature.
-        let mut temp_vector = [0;4];
+        let mut temp_vector = [0; 2];
         loop {
             //if received.is_ok() { fahrenheit = !fahrenheit; }
             //cpu_array[0] = (((UpCharBits::UpF - UpCharBits::UpC) * fahrenheit as u8) - UpCharBits::UpC) as u8;
@@ -35,16 +35,13 @@ pub fn get_tm_1637_thread(
                 0,
             );
             // Reset buffer
-            temp_vector = [0;4];
         }
     })
 }
 
 fn convert_u16_to_tm_array(num: u16, fahrenheit: bool) -> [u8; 4] {
-    //if fahrenheit { cpu = (cpu * 9 / 5 + 32) as u16; }
-    let mut cpu_array = TM1637Adapter::encode_number(
-        (num + ((num as f32 * 0.8) as u16 + 32) * fahrenheit as u16) as u16,
-    );
-    cpu_array[0] = ((56 * fahrenheit as u8) + 57) as u8;
+    let mut cpu_array =
+        TM1637Adapter::encode_number(num + (num * 4 / 5 + 32) * fahrenheit as u16);
+    cpu_array[0] = (56 * fahrenheit as u8) + 57;
     cpu_array
 }
