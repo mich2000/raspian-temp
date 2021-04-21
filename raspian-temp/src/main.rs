@@ -11,7 +11,7 @@ mod four_digit;
 mod util;
 
 fn main() -> Result<(), Box<dyn Error>> {
-    let (button_sender, tm1637_receiver) = mpsc::channel();
+    let (button_sender, tm1637_receiver) = mpsc::sync_channel(0);
     let config: conf::RaspianConfig =
         serde_json::from_str(&args().nth(1).ok_or(RaspianError::JsonConfigFaulthy)?)
             .or(Err(RaspianError::JsonParsingFailed))?;
