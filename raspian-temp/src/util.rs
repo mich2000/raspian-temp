@@ -33,5 +33,5 @@ pub fn get_rasperry_pi_temp(buffer: &mut [u8; 2]) -> Result<u16, RaspianError> {
         .or(Err(RaspianError::CpuTempCannotBeRead))?;
     // Converts '"45' as a example buffer and takes
     let string_buffer = std::str::from_utf8(&buffer[..]).unwrap().trim();
-    Ok(string_to_u16(string_buffer)?)
+    string_to_u16(string_buffer)
 }
