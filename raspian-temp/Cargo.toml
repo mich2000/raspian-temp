@@ -3,8 +3,6 @@ authors = ["Michael Hertsens <michael28072000@outlook.com>"]
 edition = "2018"
 name = "raspbian_temp"
 version = "0.1.0"
-[build]
-RUSTFLAGS = "-C target-cpu=native"
 
 [dependencies]
 tm1637-gpio-driver = "2.0.4"
