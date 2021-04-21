@@ -6,7 +6,8 @@ A small project that I make to print out the temperature out of the raspberry pi
 
 The basic deploy of the application is you install it and give it good parameters.
 
-`raspbian_temp '{ "dio_pin" : 23, "clk_pin" : 18, "brightness" : 5, "btn_pin" : 17 }'`
+`raspbian_temp 23 18 5 17`
+`raspbian_temp "dio_pin" "clk_pin" "brightness" "btn_pin"`
 
 * **dio_pin_tm** => Digital input/output pin of the tm1637. *Ex: pin 23 on raspberry pi 4 1gb*
 * **clk_pin_tm** => Clock pin of the tm1637. *Ex: pin 18 on raspberry pi 4 1gb*
