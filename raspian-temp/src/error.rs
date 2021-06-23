@@ -1,6 +1,8 @@
 use std::error::Error;
 use std::fmt::{self, Formatter};
 
+pub type IoError = std::io::Error;
+
 #[derive(Debug)]
 pub enum RaspianError {
     ParsingNumFailed,
@@ -8,6 +10,13 @@ pub enum RaspianError {
     CpuTempCannotBeRead,
     OutOfBrightnessRange,
     ArgumentIsEmpty,
+    Io(IoError),
+}
+
+impl From<IoError> for RaspianError {
+    fn from(io_error : IoError) -> Self {
+        RaspianError::Io(io_error)
+    }
 }
 
 impl Error for RaspianError {}
@@ -28,6 +37,7 @@ impl fmt::Display for RaspianError {
                 "Number was not between 0 and 7, these are the brightness levels."
             ),
             RaspianError::ArgumentIsEmpty => write!(f, "Argument is empty"),
+            RaspianError::Io(e) => write!(f, "An IO error: {}", e),
         }
     }
 }

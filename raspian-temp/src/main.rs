@@ -13,7 +13,7 @@ mod util;
 fn main() -> Result<(), Box<dyn Error>> {
     let (button_sender, tm1637_receiver) = mpsc::sync_channel(0);
     let config = RaspianConfig::get_from_env()?;
-    let tm_handler: JoinHandle<Result<(), RaspianError>> = four_digit::get_tm_1637_thread(
+    let _tm_handler: JoinHandle<Result<(), RaspianError>> = four_digit::get_tm_1637_thread(
         config.get_dio_pin(),
         config.get_clk_pin(),
         config.get_brightness(),
@@ -24,7 +24,7 @@ fn main() -> Result<(), Box<dyn Error>> {
         button.wait_for_active(None);
         button_sender.send(()).unwrap();
     }
-    tm_handler.join().unwrap()?;
+    _tm_handler.join().unwrap()?;
 
     Ok(())
 }

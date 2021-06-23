@@ -1,6 +1,7 @@
 use crate::RaspianError;
 use std::io::Read;
 use tm1637_gpio_driver::Brightness;
+use std::fs::File;
 
 static CPU_TEMP_PATH: &str = "/sys/class/thermal/thermal_zone0/temp";
 
@@ -39,9 +40,12 @@ pub fn get_brightness(num: u16) -> Result<Brightness, RaspianError> {
     }
 }
 
-pub fn get_rasperry_pi_temp(buffer: &mut [u8; 2]) -> Result<u16, RaspianError> {
-    let file_pi_temp = std::fs::File::open(CPU_TEMP_PATH).or(Err(RaspianError::CpuTempFileFail))?;
-    let mut handle = file_pi_temp.take(2);
+pub fn get_raspberry_pi_temp_file() -> Result<File, RaspianError> {
+    File::open(CPU_TEMP_PATH).or(Err(RaspianError::CpuTempFileFail))
+}
+
+pub fn get_raspberry_pi_temp(buffer: &mut [u8; 2], temp_file : &File) -> Result<u16, RaspianError> {
+    let mut handle = temp_file.take(2);
     handle
         .read_exact(buffer)
         .or(Err(RaspianError::CpuTempCannotBeRead))?;

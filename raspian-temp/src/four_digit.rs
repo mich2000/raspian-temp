@@ -25,15 +25,20 @@ pub fn get_tm_1637_thread(
         let wait_duration = Duration::from_millis(500);
         tm1637display.set_brightness(brightness);
         let mut fahrenheit = false;
+        let temp_file = util::get_raspberry_pi_temp_file()?;
         // We are mostly reading 2 bytes to be sure we got the temperature.
         let mut temp_vector = [0; 2];
         loop {
             //if received.is_ok() { fahrenheit = !fahrenheit; }
             fahrenheit ^= rx.recv_timeout(wait_duration).is_ok();
             tm1637display.write_segments_raw(
-                &convert_u16_to_tm_array(util::get_rasperry_pi_temp(&mut temp_vector)?, fahrenheit),
+                &convert_u16_to_tm_array(
+                    util::get_raspberry_pi_temp(&mut temp_vector, &temp_file)?,
+                    fahrenheit,
+                ),
                 0,
             );
+            temp_file.sync_all()?;
         }
     })
 }
