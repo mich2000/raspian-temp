@@ -1,6 +1,6 @@
 # raspian-temp
 
-A small project that I make to print out the temperature out of the raspberry pi 4 1gb on the tm1637 and with a grovepi button attached to it you can push it to switch between fahrenheit and celsius.
+A small project that I made to print out the temperature out of the raspberry pi 4 1gb on the tm1637 and with a grovepi button attached to it you can push it to switch between fahrenheit and celsius.
 
 ## Deploy
 
